@@ -38,6 +38,9 @@ MultibandCompressorAudioProcessorEditor::MultibandCompressorAudioProcessorEditor
 
     for (auto i = 0; i < num_compressors - 1; i++)
     {
+        auto initial_value = 40.0 + pow(
+            2,
+            (i + 3) * log2(20000.0) / (num_compressors + 2));
         auto index = std::to_string(i + 1);
         auto name = "Crossover " + index + " Frequency";
 
@@ -45,10 +48,10 @@ MultibandCompressorAudioProcessorEditor::MultibandCompressorAudioProcessorEditor
             processor.crossover_nodes_[i]->getProcessor());
         
         auto crossover_slider = new Slider("crossover_" + index);
-        crossover_slider->setSliderStyle(Slider::LinearBar);
 
+        crossover_slider->setSliderStyle(Slider::LinearBar);
         crossover_slider->setRange(40.0, 20000.0, 1.0);
-        crossover_slider->setValue(200 * pow(3, i));
+        crossover_slider->setValue(initial_value);
         crossover_slider->setTextValueSuffix(" Hz");
         crossover_slider->setSkewFactor(0.5);
         addAndMakeVisible(crossover_slider);
