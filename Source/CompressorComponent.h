@@ -20,31 +20,34 @@ public:
 class CompressorComponent : public GroupComponent
 {
 public:
-    CompressorComponent(const String& name);
+    CompressorComponent(const String& name, CompressorProcessor* p);
     void resized() override;
+    void attachToProcessor();
 
     LabelledSlider attack {
         "Attack",
-        Slider::RotaryHorizontalVerticalDrag,
+        Slider::LinearBar,
         Slider::TextBoxBelow};
     LabelledSlider release {
         "Release",
-        Slider::RotaryHorizontalVerticalDrag,
+        Slider::LinearBar,
         Slider::TextBoxBelow};
     LabelledSlider ratio {
         "Ratio",
-        Slider::RotaryHorizontalVerticalDrag,
+        Slider::LinearBar,
         Slider::TextBoxBelow};
     LabelledSlider knee {
         "Knee",
-        Slider::RotaryHorizontalVerticalDrag,
+        Slider::LinearBar,
         Slider::TextBoxBelow};
     LabelledSlider makeupGain {
         "Make-up Gain",
-        Slider::RotaryHorizontalVerticalDrag,
+        Slider::LinearVertical,
         Slider::TextBoxBelow};
     LabelledSlider threshold {
         "Threshold",
         Slider::LinearVertical,
         Slider::TextBoxBelow};
+private:
+    CompressorProcessor* p;
 };

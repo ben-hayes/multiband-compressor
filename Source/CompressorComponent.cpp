@@ -20,7 +20,7 @@ LabelledSlider::LabelledSlider(
 
 void LabelledSlider::resized()
 {
-    slider.setBounds(getLocalBounds().reduced(10));
+    slider.setBounds(getLocalBounds().reduced(13));
     slider.setTextBoxStyle(
         slider.getTextBoxPosition(),
         true,
@@ -30,13 +30,17 @@ void LabelledSlider::resized()
 
 void LabelledSlider::paint(Graphics& g)
 {
+    // make border transparent
     setColour(
         outlineColourId,
-        getLookAndFeel().findColour(ResizableWindow::backgroundColourId));
+        Colour());
     GroupComponent::paint(g);
 }
 
-CompressorComponent::CompressorComponent(const String& name)
+CompressorComponent::CompressorComponent(
+        const String& name,
+        CompressorProcessor* p)
+    : p (p)
 {
     setText(name);
     setTextLabelPosition(Justification::topLeft);
@@ -61,7 +65,7 @@ CompressorComponent::CompressorComponent(const String& name)
     makeupGain.slider.setValue(0.0);
     makeupGain.slider.setTextValueSuffix(" dB");
 
-    threshold.slider.setRange(-72.0, 0.0, 0.1);
+    threshold.slider.setRange(-66.6, 0.0, 0.1);
     threshold.slider.setValue(0.0);
     threshold.slider.setTextValueSuffix(" dB");
 
@@ -75,10 +79,36 @@ CompressorComponent::CompressorComponent(const String& name)
 
 void CompressorComponent::resized()
 {
-    attack.setBounds(10, 13, 80, 100);
-    release.setBounds(90, 13, 80, 100);
-    ratio.setBounds(10, 113, 80, 100);
-    knee.setBounds(90, 113, 80, 100);
-    makeupGain.setBounds(90, 213, 80, 100);
-    threshold.setBounds(170, 13, 70, 300);
+    attack.setBounds(0, 20, 90, 40);
+    release.setBounds(0, 57, 90, 40);
+    ratio.setBounds(0, 94, 90, 40);
+    knee.setBounds(0, 131, 90, 40);
+    threshold.setBounds(70, 20, 80, 151);
+    makeupGain.setBounds(130, 20, 80, 151);
+}
+
+void CompressorComponent::attachToProcessor()
+{
+    attack.slider.onValueChange = [this] {
+        *(p->attack_in_seconds_) =
+            attack.slider.getValue();
+    };
+    release.slider.onValueChange = [this] {
+        *(p->release_in_seconds_) =
+            release.slider.getValue();
+    };
+    ratio.slider.onValueChange = [this] {
+        *(p->ratio_) = ratio.slider.getValue();
+    };
+    knee.slider.onValueChange = [this] {
+        *(p->knee_in_db_) = knee.slider.getValue();
+    };
+    makeupGain.slider.onValueChange = [this] {
+        *(p->makeup_gain_in_db_) =
+            makeupGain.slider.getValue();
+    };
+    threshold.slider.onValueChange = [this] {
+        *(p->threshold_in_db_) =
+            threshold.slider.getValue();
+    };
 }
