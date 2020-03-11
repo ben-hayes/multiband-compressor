@@ -54,6 +54,12 @@ MultibandCompressorAudioProcessorEditor::MultibandCompressorAudioProcessorEditor
         crossover_slider->setSkewFactor(0.4);
         addAndMakeVisible(crossover_slider);
 
+        crossover_slider->onValueChange =
+            [crossover_processor, crossover_slider] {
+                *(crossover_processor->cutoff_frequency_in_hz_) =
+                    crossover_slider->getValue();
+            };
+
         // Add it to a juce::OwnedArray.
         crossover_sliders_.add(crossover_slider);
     }
