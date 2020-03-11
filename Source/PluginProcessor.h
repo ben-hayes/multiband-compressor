@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
@@ -59,17 +49,8 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    std::unique_ptr<AudioProcessorGraph> processor_graph_;
-
-    Node::Ptr audio_input_node_;
-    Node::Ptr audio_output_node_;
     Array<Node::Ptr> crossover_nodes_;
     Array<Node::Ptr> compressor_nodes_;
-
-    std::unique_ptr<AudioProcessorParameterGroup> parameters_;
-
-    Array<std::unique_ptr<CompressorProcessor>> compressor_processors_;
-    Array<std::unique_ptr<CrossoverFilterProcessor>> crossover_processors_;
 
 private:
     //==============================================================================
@@ -77,4 +58,9 @@ private:
     void initialiseGraph();
     void connectAudioNodes();
     void updateGraph();
+
+    std::unique_ptr<AudioProcessorGraph> processor_graph_;
+
+    Node::Ptr audio_input_node_;
+    Node::Ptr audio_output_node_;
 };

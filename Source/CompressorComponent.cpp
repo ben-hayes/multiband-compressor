@@ -6,6 +6,7 @@ LabelledSlider::LabelledSlider(
     Slider::SliderStyle style,
     Slider::TextEntryBoxPosition textPos)
 {
+    // Set up the slider with the passed in parameters
     setText(name);
     setTextLabelPosition(Justification::centredTop);
 
@@ -20,6 +21,8 @@ LabelledSlider::LabelledSlider(
 
 void LabelledSlider::resized()
 {
+    // When resize is called, setup the slider to sit just within the size of
+    // the box:
     slider.setBounds(getLocalBounds().reduced(13));
     slider.setTextBoxStyle(
         slider.getTextBoxPosition(),
@@ -42,6 +45,8 @@ CompressorComponent::CompressorComponent(
         CompressorProcessor* p)
     : p (p)
 {
+    // Fairly self explanatory: simply set up all the UI components necessary
+    // to control a compressor
     setText(name);
     setTextLabelPosition(Justification::topLeft);
 
@@ -89,6 +94,9 @@ void CompressorComponent::resized()
 
 void CompressorComponent::attachToProcessor()
 {
+    // CompressorComponent is constructed with a pointer to its associated
+    // CompressorProcessor, so in this function we use lambda callbacks to
+    // attach the UI controls to the parameters in the relevant processor
     attack.slider.onValueChange = [this] {
         *(p->attack_in_seconds_) =
             attack.slider.getValue();

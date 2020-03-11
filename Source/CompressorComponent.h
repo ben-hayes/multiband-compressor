@@ -5,6 +5,7 @@
 
 class LabelledSlider : public GroupComponent
 {
+// A GroupComponent derivative that creates a slider with an attached label
 public:
     LabelledSlider(
         const String& name,
@@ -19,6 +20,8 @@ public:
 
 class CompressorComponent : public GroupComponent
 {
+// A GroupComponent derivative that wraps all the controls necessary for a
+// compressor processor.
 public:
     CompressorComponent(const String& name, CompressorProcessor* p);
     void resized() override;

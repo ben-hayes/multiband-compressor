@@ -4,6 +4,10 @@
     CrossoverFilterProcessor.h
     Created: 10 Mar 2020 1:14:53pm
     Author:  Ben Hayes
+    Description:
+
+    Implements a 4th order digital Linkwitz-Riley filter using Juce's dsp::IIR
+    class.
 
   ==============================================================================
 */

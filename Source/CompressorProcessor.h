@@ -4,6 +4,10 @@
       CompressorProcessor.h
       Created: 2 Mar 2020 3:45:35pm
       Author:  Ben Hayes
+      Description:
+
+      A dynamic range compressor implemented as a derivative of the
+      AudioProcessor base class.
 
     ==============================================================================
 */

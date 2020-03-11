@@ -4,6 +4,10 @@
     ProcessorBase.h
     Created: 9 Mar 2020 11:31:46am
     Author:  Ben Hayes
+    Description:
+
+    A base class that saves us from having to override all of the virtual
+    methods in AudioProcessor multiple times.
 
     Code taken from JUCE AudioProcessorGraph tutorial:
     https://docs.juce.com/master/tutorial_audio_processor_graph.html
