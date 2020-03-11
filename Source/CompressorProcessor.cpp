@@ -28,7 +28,7 @@ CompressorProcessor::CompressorProcessor(int index)
     makeup_gain_in_db_ = new AudioParameterFloat(
         "band_" + index_str + "_makeup_gain",
         "Band " + index_str + " Makeup Gain",
-        -32.0f,
+        0.0f,
         32.0f,
         0.0f);
     knee_in_db_ = new AudioParameterFloat(

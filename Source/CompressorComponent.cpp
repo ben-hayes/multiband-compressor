@@ -46,15 +46,15 @@ CompressorComponent::CompressorComponent(
     setTextLabelPosition(Justification::topLeft);
 
     attack.slider.setRange(1.0, 150.0, 1.0);
-    attack.slider.setValue(1.0);
+    attack.slider.setValue(10.0);
     attack.slider.setTextValueSuffix(" ms");
 
     release.slider.setRange(1.0, 1000.0, 1.0);
-    release.slider.setValue(1.0);
+    release.slider.setValue(100.0);
     release.slider.setTextValueSuffix(" ms");
 
     ratio.slider.setRange(1.0, 20.0, 0.1);
-    ratio.slider.setValue(1.0);
+    ratio.slider.setValue(2.0);
     ratio.slider.setTextValueSuffix("");
 
     knee.slider.setRange(0.0, 32.0, 1.0);
@@ -66,7 +66,7 @@ CompressorComponent::CompressorComponent(
     makeupGain.slider.setTextValueSuffix(" dB");
 
     threshold.slider.setRange(-66.6, 0.0, 0.1);
-    threshold.slider.setValue(0.0);
+    threshold.slider.setValue(-6.0);
     threshold.slider.setTextValueSuffix(" dB");
 
     addAndMakeVisible(&attack);

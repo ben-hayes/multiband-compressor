@@ -31,7 +31,8 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     MultibandCompressorAudioProcessor& processor;
-    Array<std::shared_ptr<CompressorComponent>> compressor_editors_;
+    OwnedArray<CompressorComponent> compressor_editors_;
+    OwnedArray<Slider> crossover_sliders_;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MultibandCompressorAudioProcessorEditor)
 };
