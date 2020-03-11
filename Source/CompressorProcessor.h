@@ -21,6 +21,7 @@ public:
         AudioSampleBuffer& buffer,
         MidiBuffer& midiMessages) override;
     const String getName() const override { return "Compressor"; }
+    std::unique_ptr<AudioProcessorParameterGroup> getParameterTree();
 
     AudioParameterFloat* attack_in_seconds_;
     AudioParameterFloat* release_in_seconds_;

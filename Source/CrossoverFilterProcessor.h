@@ -22,6 +22,7 @@ public:
         AudioSampleBuffer& buffer,
         MidiBuffer& midiMessages) override;
     const String getName() const override { return "Crossover Filter"; }
+    std::unique_ptr<AudioProcessorParameterGroup> getParameterTree();
     void reset() override;
 
     AudioParameterFloat* cutoff_frequency_in_hz_;

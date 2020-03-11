@@ -33,19 +33,13 @@ MultibandCompressorAudioProcessor::MultibandCompressorAudioProcessor()
     }
     for (auto& compressor_processor : compressor_processors_)
     {
-        for (auto param : compressor_processor->getParameters())
-        {
-            addParameter(param);
-        }
+        addParameterGroup(compressor_processor->getParameterTree());
         compressor_nodes_.add(
             processor_graph_->addNode(std::move(compressor_processor))); 
     }
     for (auto& crossover_processor : crossover_processors_)
     {
-        for (auto param : crossover_processor->getParameters())
-        {
-            addParameter(param);
-        }
+        addParameterGroup(crossover_processor->getParameterTree());
         crossover_nodes_.add(
             processor_graph_->addNode(std::move(crossover_processor)));
     }

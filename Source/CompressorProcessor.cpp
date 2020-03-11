@@ -49,13 +49,6 @@ CompressorProcessor::CompressorProcessor(int index)
         1.0f,
         20.0f,
         2.0f);
-
-    addParameter(attack_in_seconds_);
-    addParameter(release_in_seconds_);
-    addParameter(makeup_gain_in_db_);
-    addParameter(knee_in_db_);
-    addParameter(threshold_in_db_);
-    addParameter(ratio_);
 }
 
 void CompressorProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
@@ -75,6 +68,26 @@ void CompressorProcessor::processBlock(
         auto smoothed_gain_in_db = applyTimeSmoothing(gain_in_db);
         applyGain(smoothed_gain_in_db, buffer, n);
     }
+}
+
+std::unique_ptr<AudioProcessorParameterGroup> 
+    CompressorProcessor::getParameterTree()
+{
+    auto parameter_tree = std::make_unique<AudioProcessorParameterGroup>();
+    parameter_tree->addChild(
+        std::unique_ptr<AudioParameterFloat>(attack_in_seconds_));
+    parameter_tree->addChild(
+        std::unique_ptr<AudioParameterFloat>(release_in_seconds_));
+    parameter_tree->addChild(
+        std::unique_ptr<AudioParameterFloat>(makeup_gain_in_db_));
+    parameter_tree->addChild(
+        std::unique_ptr<AudioParameterFloat>(knee_in_db_));
+    parameter_tree->addChild(
+        std::unique_ptr<AudioParameterFloat>(threshold_in_db_));
+    parameter_tree->addChild(
+        std::unique_ptr<AudioParameterFloat>(ratio_));
+
+    return std::move(parameter_tree);
 }
 
 void CompressorProcessor::calculateTimingCoefficients()

@@ -28,7 +28,6 @@ CrossoverFilterProcessor::CrossoverFilterProcessor(int index)
             40.0,
             20000.0,
             1000.0);
-    addParameter(cutoff_frequency_in_hz_);
 }
 
 CrossoverFilterProcessor::~CrossoverFilterProcessor()
@@ -76,6 +75,15 @@ void CrossoverFilterProcessor::processBlock(
     buffer.copyFrom(2, 0, high_block.getChannelPointer(0), buffer.getNumSamples());
     buffer.copyFrom(3, 0, high_block.getChannelPointer(1), buffer.getNumSamples());
 
+}
+
+std::unique_ptr<AudioProcessorParameterGroup> 
+    CrossoverFilterProcessor::getParameterTree()
+{
+    auto parameter_tree = std::make_unique<AudioProcessorParameterGroup>();
+    parameter_tree->addChild(
+        std::unique_ptr<AudioParameterFloat>(cutoff_frequency_in_hz_));
+    return std::move(parameter_tree);
 }
 
 void CrossoverFilterProcessor::reset()
